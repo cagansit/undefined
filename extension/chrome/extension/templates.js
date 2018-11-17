@@ -6,10 +6,12 @@ import { fromJS, isImmutable } from 'immutable';
 
 chrome.storage.local.get('state', (obj) => {
   const { state } = obj;
-  let initialState = JSON.parse(state || '{}');
-  if (!isImmutable(state)) {
-    initialState = fromJS(state);
+  const initialState = JSON.parse(state || '{}');
+
+  if (!isImmutable(initialState.templates)) {
+    initialState.templates = fromJS(initialState.templates);
   }
+
   const createStore = require('../../app/store/configureStore');
 
   ReactDOM.render(
