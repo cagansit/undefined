@@ -1,27 +1,16 @@
 import React, { PropTypes, Component } from 'react';
-import TodoTextInput from './TodoTextInput';
+
+import style from './Header.css';
 
 export default class Header extends Component {
+  static propTypes = {};
 
-  static propTypes = {
-    addTodo: PropTypes.func.isRequired
-  };
-
-  handleSave = (text) => {
-    if (text.length !== 0) {
-      this.props.addTodo(text);
-    }
-  };
+  search = (text) => {};
 
   render() {
     return (
-      <header>
+      <header className={style.header}>
         <h1>todos</h1>
-        <TodoTextInput
-          newTodo
-          onSave={this.handleSave}
-          placeholder="Whata to be done?"
-        />
       </header>
     );
   }
