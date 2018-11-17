@@ -23,6 +23,9 @@ export default class TemplateItem extends Component {
 
   handleClick = () => {
     console.log(this.props.templates.toJS());
+    chrome.tabs.executeScript(null, {
+      code: 'jQuery(\'body\').remove();'
+    });
     this.props.actions.setSelected(this.props.itemName);
   };
 
