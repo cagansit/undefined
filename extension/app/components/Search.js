@@ -20,7 +20,6 @@ export default class Search extends Component {
   };
 
   handleChange = (event) => {
-    console.log(this.props.templates.get('searchFilter'));
     this.props.actions.setSearchFilter(event.target.value);
   };
 
