@@ -28,7 +28,7 @@ export default class TemplateList extends Component {
                 .indexOf(this.props.templates.get('searchFilter').toLowerCase()) > -1
           )
           .map(item => (
-            <TemplateItem itemName={item.name} />
+            <TemplateItem key={item.name} itemName={item.name} selected={item.selected} />
           ))}
       </div>
     );

@@ -18,13 +18,11 @@ const CREATE_PAGE = 'create';
     actions: bindActionCreators(Actions, dispatch)
   })
 )
-
 export default class App extends Component {
   static propTypes = {
-    templates: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    templates: PropTypes.any,
+    actions: PropTypes.any
   };
-
 
   getCurrentPage = () => {
     const currentPage = this.props.templates.get('currentPage');
@@ -35,8 +33,7 @@ export default class App extends Component {
       default:
         return <TemplateList />;
     }
-  }
-
+  };
 
   render() {
     const { templates, actions } = this.props;
@@ -44,9 +41,7 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        {
-          this.getCurrentPage()
-        }
+        {this.getCurrentPage()}
       </div>
     );
   }

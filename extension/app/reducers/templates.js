@@ -30,6 +30,19 @@ export default function templates(state = initialState, action) {
       return state.set('searchFilter', action.text);
     case ActionTypes.SET_PAGE:
       return state.set('currentPage', action.page);
+    case ActionTypes.SET_SELECTED:
+      return state.update('items', items =>
+        items.map((item) => {
+          const newItem = item;
+          let selected = false;
+
+          if (newItem.get('name') === action.selected) {
+            selected = true;
+          }
+
+          return newItem.set('selected', selected);
+        })
+      );
     default:
       return state;
   }

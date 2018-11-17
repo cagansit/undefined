@@ -13,17 +13,15 @@ import * as Actions from '../actions/templates';
     actions: bindActionCreators(Actions, dispatch)
   })
 )
-
 export default class Menu extends Component {
-
   static propTypes = {
-    actions: PropTypes.func,
-  }
+    actions: PropTypes.any
+  };
 
   handlePage = page => () => {
     console.log(page);
     this.props.actions.setPage(page);
-  }
+  };
 
   render() {
     return (
@@ -31,9 +29,15 @@ export default class Menu extends Component {
         <div className={style.menuButton}>
           Menu
           <div className={style.menuList}>
-            <div className={style.menuListItem} onClick={this.handlePage(types.LIST_PAGE)}>List</div>
-            <div className={style.menuListItem} onClick={this.handlePage(types.CREATE_PAGE)}>Create</div>
-            <div className={style.menuListItem} onClick={this.handlePage(types.SETTINGS_PAGE)}>Settings</div>
+            <div className={style.menuListItem} onClick={this.handlePage(types.LIST_PAGE)}>
+              List
+            </div>
+            <div className={style.menuListItem} onClick={this.handlePage(types.CREATE_PAGE)}>
+              Create
+            </div>
+            <div className={style.menuListItem} onClick={this.handlePage(types.SETTINGS_PAGE)}>
+              Settings
+            </div>
           </div>
         </div>
       </div>

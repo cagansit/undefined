@@ -15,8 +15,8 @@ import style from './Search.css';
 )
 export default class Search extends Component {
   static propTypes = {
-    templates: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    templates: PropTypes.any,
+    actions: PropTypes.any
   };
 
   handleChange = (event) => {

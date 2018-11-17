@@ -7,3 +7,7 @@ export function setSearchFilter(text) {
 export function setPage(page) {
   return { type: types.SET_PAGE, page };
 }
+
+export function setSelected(selected) {
+  return { type: types.SET_SELECTED, selected };
+}
