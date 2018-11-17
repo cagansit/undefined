@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as TodoActions from '../actions/todos';
-import style from './App.css';
+import Header from '../components/Header';
 
 @connect(
   state => ({
@@ -13,7 +13,6 @@ import style from './App.css';
   })
 )
 export default class App extends Component {
-
   static propTypes = {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
@@ -22,10 +21,6 @@ export default class App extends Component {
   render() {
     const { todos, actions } = this.props;
 
-    return (
-      <div className={style.normal}>
-        hello ex panel
-      </div>
-    );
+    return <Header />;
   }
 }
