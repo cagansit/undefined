@@ -2,9 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/templates';
-import style from './App.css';
-import Header from '../components/Header';
-import TemplateList from '../components/TemplateList';
+
+import style from './Search.css';
 
 @connect(
   state => ({
@@ -14,19 +13,26 @@ import TemplateList from '../components/TemplateList';
     actions: bindActionCreators(Actions, dispatch)
   })
 )
-export default class App extends Component {
+export default class Search extends Component {
   static propTypes = {
     templates: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   };
 
-  render() {
-    const { templates, actions } = this.props;
+  handleChange = (event) => {
+    console.log(this.props.templates.get('searchFilter'));
+    this.props.actions.setSearchFilter(event.target.value);
+  };
 
+  render() {
     return (
       <div>
-        <Header />
-        <TemplateList />
+        <input
+          id={style.search}
+          placeholder="Search Templates"
+          value={this.props.templates.get('searchFilter')}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
