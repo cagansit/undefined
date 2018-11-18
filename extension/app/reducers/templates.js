@@ -5,24 +5,7 @@ const initialState = fromJS({
   searchFilter: '',
   javascriptCode: '',
   cssCode: '',
-  items: [
-    {
-      name: 'Hamburger Menu',
-      selected: false
-    },
-    {
-      name: 'Notification Center',
-      selected: false
-    },
-    {
-      name: 'Side Menu',
-      selected: false
-    },
-    {
-      name: '3D Recommendation',
-      selected: false
-    }
-  ],
+  items: [],
   currentPage: 'list'
 });
 
@@ -47,6 +30,8 @@ export default function templates(state = initialState, action) {
       );
     case ActionTypes.SET_LANGUAGE:
       return state.mergeDeep(fromJS(action.data));
+    case ActionTypes.FETCH_TEMPLATES:
+      return state.mergeDeep(fromJS({ items: action.data }));
     default:
       return state;
   }

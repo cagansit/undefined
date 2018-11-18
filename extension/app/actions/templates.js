@@ -15,3 +15,7 @@ export function setSelected(selected) {
 export function setLanguage(data) {
   return { type: types.SET_LANGUAGE, data };
 }
+
+export function fetchTemplates(data) {
+  return { type: types.FETCH_TEMPLATES, data };
+}

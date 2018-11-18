@@ -15,10 +15,19 @@ import TemplateItem from './TemplateItem';
   })
 )
 export default class TemplateList extends Component {
-  render() {
-    return (
-      <div id={style.TemplateList}>
-        {this.props.templates
+
+  componentDidMount() {
+    fetch('http://localhost:8000/api/templates')
+      .then(response => response.json())
+      .then((response) => {
+        if (response.status) {
+          console.log(response.data);
+          this.props.actions.fetchTemplates(response.data);
+        }
+      });
+  }
+
+  getListItems = () => this.props.templates
           .get('items')
           .toJS()
           .filter(
@@ -29,7 +38,14 @@ export default class TemplateList extends Component {
           )
           .map(item => (
             <TemplateItem key={item.name} itemName={item.name} selected={item.selected} />
-          ))}
+          ))
+
+  render() {
+    return (
+      <div id={style.TemplateList}>
+        {
+          this.getListItems()
+        }
       </div>
     );
   }
