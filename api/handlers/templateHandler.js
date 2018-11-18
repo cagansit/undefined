@@ -45,3 +45,37 @@ exports.updateTemplate = function(req, res) {
         res.send(response);
     });
 };
+
+exports.getPartners = function(req, res) {
+    const response = { status: true };
+    const getTemplatesQuery = 'select pName from partner where pStatus = 1';
+    db.query(getTemplatesQuery, (err, result, fields) => {
+        if (err) throw err;
+        response['data'] = result;
+        res.send(response);
+    });
+};
+
+exports.getCampaigns = function(req, res) {
+    const response = { status: true };
+    const customCampaignsQuery = 'select id, campName from partner_'+req.query.partnerName+'.custom order by id limit 20';
+    console.log(customCampaignsQuery);
+    db.query(customCampaignsQuery, (err, result, fields) => {
+        if (err) throw err;
+        response['data'] = result;
+        res.send(response);
+    });
+};
+
+exports.setCampaign = function(req, res) {
+    const response = { status: true };
+    let updateQuery = 'UPDATE partner_'+req.body.partnerName+'.custom SET ? WHERE id=?';
+    let query = db.format(updateQuery, [req.body.data, req.body.id]);
+    console.log(query);
+    db.query(query, (err, result, fields) => {
+        if (err) throw err;
+        response['data'] = result;
+        res.send(response);
+    });
+};
+
