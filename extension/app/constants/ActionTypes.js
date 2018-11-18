@@ -3,3 +3,5 @@ export const SET_PAGE = 'SET_PAGE';
 export const SET_SELECTED = 'SET_SELECTED';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const FETCH_TEMPLATES = 'FETCH_TEMPLATES';
+export const SET_NEW_TEMPLATE_NAME = 'SET_NEW_TEMPLATE_NAME';
+export const CLEAR_INPUTS = 'CLEAR_INPUTS';

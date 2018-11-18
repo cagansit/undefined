@@ -16,7 +16,7 @@ import TemplateItem from './TemplateItem';
 )
 export default class TemplateList extends Component {
 
-  componentDidMount() {
+  fetchListItems = () => {
     fetch('http://localhost:8000/api/templates')
       .then(response => response.json())
       .then((response) => {
@@ -25,6 +25,14 @@ export default class TemplateList extends Component {
           this.props.actions.fetchTemplates(response.data);
         }
       });
+  }
+
+  componentDidMount() {
+    this.fetchListItems();
+  }
+
+  componentWillUnmount() {
+    this.fetchListItems();
   }
 
   getListItems = () => this.props.templates

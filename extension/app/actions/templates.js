@@ -19,3 +19,11 @@ export function setLanguage(data) {
 export function fetchTemplates(data) {
   return { type: types.FETCH_TEMPLATES, data };
 }
+
+export function setNewTemplateName(name) {
+  return { type: types.SET_NEW_TEMPLATE_NAME, name };
+}
+
+export function clearInputs() {
+  return { type: types.CLEAR_INPUTS };
+}

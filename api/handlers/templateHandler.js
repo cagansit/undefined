@@ -2,8 +2,9 @@ var db = require('../db.js');
 
 exports.createTemplate = function(req, res) {
     const response = { status: true };
-    const newTemplateQuery = `INSERT INTO templateStore (name, description, image, javascriptCode, cssCode, isActive) VALUES (?)`;
-    const query = db.format(newTemplateQuery, req.body);
+    const newTemplateQuery = 'INSERT INTO `templateStore` (`name`, `description`, `image`, `javascriptCode`, `cssCode`, `isActive`) VALUES (?)';
+    const query = db.format(newTemplateQuery, [Object.values(req.body)]);
+    console.log(query);
     db.query(query, (err, result, fields) => {
         if (err) throw err;
         response['data'] = result;
