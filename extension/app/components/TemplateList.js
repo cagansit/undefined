@@ -15,17 +15,15 @@ import TemplateItem from './TemplateItem';
   })
 )
 export default class TemplateList extends Component {
-
   fetchListItems = () => {
     fetch('http://localhost:8000/api/templates')
       .then(response => response.json())
       .then((response) => {
         if (response.status) {
-          console.log(response.data);
           this.props.actions.fetchTemplates(response.data);
         }
       });
-  }
+  };
 
   componentDidMount() {
     this.fetchListItems();
@@ -35,26 +33,18 @@ export default class TemplateList extends Component {
     this.fetchListItems();
   }
 
-  getListItems = () => this.props.templates
-          .get('items')
-          .toJS()
-          .filter(
-            item =>
-              item.name
-                .toLowerCase()
-                .indexOf(this.props.templates.get('searchFilter').toLowerCase()) > -1
-          )
-          .map(item => (
-            <TemplateItem key={item.name} itemName={item.name} selected={item.selected} />
-          ))
+  getListItems = () =>
+    this.props.templates
+      .get('items')
+      .toJS()
+      .filter(
+        item =>
+          item.name.toLowerCase().indexOf(this.props.templates.get('searchFilter').toLowerCase()) >
+          -1
+      )
+      .map(item => <TemplateItem key={item.name} itemName={item.name} selected={item.selected} />);
 
   render() {
-    return (
-      <div id={style.TemplateList}>
-        {
-          this.getListItems()
-        }
-      </div>
-    );
+    return <div id={style.TemplateList}>{this.getListItems()}</div>;
   }
 }

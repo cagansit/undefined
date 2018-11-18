@@ -5,8 +5,7 @@ import style from './Header.css';
 import Search from './Search';
 import Menu from './Menu';
 import * as Actions from '../actions/templates';
-import { LIST_PAGE, CREATE_PAGE } from '../constants/PageTypes';
-
+import { LIST_PAGE, CREATE_PAGE, SETTINGS_PAGE } from '../constants/PageTypes';
 
 @connect(
   state => ({
@@ -17,7 +16,6 @@ import { LIST_PAGE, CREATE_PAGE } from '../constants/PageTypes';
   })
 )
 export default class Header extends Component {
-
   fetchListItems = () => {
     fetch('http://localhost:8000/api/templates')
       .then(response => response.json())
@@ -27,31 +25,52 @@ export default class Header extends Component {
           this.props.actions.fetchTemplates(response.data);
         }
       });
-  }
+  };
 
   getHeaderItemsByPageType = () => {
     const currentPage = this.props.templates.get('currentPage');
     switch (currentPage) {
       case CREATE_PAGE:
-        return (<div className={style.buttonsContainer}>
-          <input className={style.templateName} placeholder="New Template Name" name="templateName" value={this.props.templates.templateName} onChange={this.handleNameInput} />
-          <div className={style.tryButton} onClick={this.handleTry} >Try!</div>
-          <div className={style.saveButton} onClick={this.handleSave} >Save!</div>
-        </div>);
+        return (
+          <div className={style.buttonsContainer}>
+            <input
+              className={style.templateName}
+              placeholder="New Template Name"
+              name="templateName"
+              value={this.props.templates.templateName}
+              onChange={this.handleNameInput}
+            />
+            <div className={style.tryButton} onClick={this.handleTry}>
+              Try!
+            </div>
+            <div className={style.saveButton} onClick={this.handleSave}>
+              Save!
+            </div>
+          </div>
+        );
+      case SETTINGS_PAGE:
+        return [
+          <div className={style.tryButton} onClick={this.handleTry}>
+            Update Preview
+          </div>,
+          <div className={style.saveButton} onClick={this.handleSave}>
+            Apply to
+          </div>
+        ];
       case LIST_PAGE:
       default:
         return <Search />;
     }
-  }
+  };
 
-  handleNameInput = event => this.props.actions.setNewTemplateName(event.target.value)
+  handleNameInput = event => this.props.actions.setNewTemplateName(event.target.value);
 
   handleTry = () => {
     const javascriptCode = this.props.templates.get('javascriptCode');
     const cssCode = this.props.templates.get('cssCode');
     console.log(javascriptCode);
     console.log(cssCode);
-  }
+  };
 
   handleSave = () => {
     const javascriptCode = this.props.templates.get('javascriptCode');
@@ -65,27 +84,26 @@ export default class Header extends Component {
       cssCode,
       isActive: '1'
     };
-    console.log(requestData);
     fetch('http://localhost:8000/api/template/create', {
       method: 'post',
       body: JSON.stringify(requestData),
       headers: {
         'Content-Type': 'application/json'
-      },
-    }).then(response => response.json()).then((data) => {
-      this.props.actions.clearInputs();
-      this.props.actions.setPage(LIST_PAGE);
-      this.fetchListItems();
-    });
-  }
+      }
+    })
+      .then(response => response.json())
+      .then((data) => {
+        this.props.actions.clearInputs();
+        this.props.actions.setPage(LIST_PAGE);
+        this.fetchListItems();
+      });
+  };
 
   render() {
     return (
       <header className={style.header}>
         <Menu />
-        {
-          this.getHeaderItemsByPageType()
-        }
+        {this.getHeaderItemsByPageType()}
       </header>
     );
   }

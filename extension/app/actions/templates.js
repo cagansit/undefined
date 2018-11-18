@@ -27,3 +27,7 @@ export function setNewTemplateName(name) {
 export function clearInputs() {
   return { type: types.CLEAR_INPUTS };
 }
+
+export function setOptionsValue(name, value) {
+  return { type: types.SET_OPTIONS_VALUE, name, value };
+}
