@@ -22,6 +22,9 @@ export default class TemplateItem extends Component {
   };
 
   handleClick = () => {
+    chrome.tabs.executeScript(null, {
+      code: "console.log(document.querySelectorAll('[src*=\"partner.js\"]')[0].getAttribute('src'))"
+    });
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       chrome.tabs.sendMessage(tabs[0].id, { greeting: 'hello' }, (response) => {});
     });
