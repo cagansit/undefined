@@ -3,6 +3,8 @@ import * as ActionTypes from '../constants/ActionTypes';
 
 const initialState = fromJS({
   searchFilter: '',
+  javascriptCode: '',
+  cssCode: '',
   items: [
     {
       name: 'Hamburger Menu',
@@ -43,6 +45,8 @@ export default function templates(state = initialState, action) {
           return newItem.set('selected', selected);
         })
       );
+    case ActionTypes.SET_LANGUAGE:
+      return state.mergeDeep(fromJS(action.data));
     default:
       return state;
   }

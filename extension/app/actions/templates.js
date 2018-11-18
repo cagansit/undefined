@@ -11,3 +11,7 @@ export function setPage(page) {
 export function setSelected(selected) {
   return { type: types.SET_SELECTED, selected };
 }
+
+export function setLanguage(data) {
+  return { type: types.SET_LANGUAGE, data };
+}
