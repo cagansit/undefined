@@ -22,9 +22,6 @@ export default class TemplateItem extends Component {
   };
 
   handleClick = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, { greeting: 'hello' }, (response) => {});
-    });
     this.props.actions.setSelected(this.props.itemName);
   };
 

@@ -1,12 +1,11 @@
-import * as Dummy from '../../app/helpers/dummyCodes';
-
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  console.log(1, msg.javascriptCode);
   const elt = document.createElement('script');
-  elt.innerHTML = Dummy.JAVASCRIPT;
+  elt.innerHTML = msg.javascriptCode;
   document.head.appendChild(elt);
 
   const sty = document.createElement('style');
-  sty.innerHTML = Dummy.CSS;
+  sty.innerHTML = msg.cssCode;
   document.head.appendChild(sty);
   return true;
 });

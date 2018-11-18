@@ -65,7 +65,7 @@ export default class Header extends Component {
               value={this.props.templates.templateName}
               onChange={this.handleNameInput}
             />
-            <div className={style.tryButton} onClick={this.handleTry}>
+            <div className={style.tryButton} onClick={this.handleTryForCreate}>
               Try!
             </div>
             <div className={style.saveButton} onClick={this.handleSave}>
@@ -129,10 +129,19 @@ export default class Header extends Component {
 
   handleNameInput = event => this.props.actions.setNewTemplateName(event.target.value);
 
-  handleTry = () => {
+  handleTryForCreate = () => {
     const javascriptCode = this.props.templates.get('javascriptCode');
     const cssCode = this.props.templates.get('cssCode');
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { javascriptCode, cssCode }, (response) => {});
+    });
+  }
+
+  handleTry = () => {
+    console.log(2);
+    const { javascriptCode, cssCode } = this.getTemplate();
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      console.log(1);
       chrome.tabs.sendMessage(tabs[0].id, { javascriptCode, cssCode }, (response) => {});
     });
   };

@@ -14,7 +14,8 @@ const initialState = fromJS({
   selectedPartner: '',
   selectedCampaign: '',
   partners: [],
-  campaigns: []
+  campaigns: [],
+  selectedItemName: '',
 });
 
 export default function templates(state = initialState, action) {
@@ -26,7 +27,8 @@ export default function templates(state = initialState, action) {
     case ActionTypes.SET_SELECTED: {
       let selectedItem;
       const newState = state
-        .update('items', items =>
+          .set('selectedItemName', action.selected)
+          .update('items', items =>
           items.map((item) => {
             const newItem = item;
             let selected = false;
@@ -49,13 +51,20 @@ export default function templates(state = initialState, action) {
           return fromJS(options);
         })
         .set('currentPage', SETTINGS_PAGE);
-
       return newState;
     }
     case ActionTypes.SET_LANGUAGE:
       return state.mergeDeep(fromJS(action.data));
     case ActionTypes.FETCH_TEMPLATES:
-      return state.set('items', fromJS(action.data));
+      return state.set('items', fromJS(action.data.map((x) => {
+        const newItem = x;
+        let selected = false;
+        if (newItem.name === state.get('selectedItemName')) {
+          selected = true;
+        }
+        newItem.selected = selected;
+        return newItem;
+      })));
     case ActionTypes.SET_NEW_TEMPLATE_NAME:
       return state.set('templateName', action.name);
     case ActionTypes.CLEAR_INPUTS:
