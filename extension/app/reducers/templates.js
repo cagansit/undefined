@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import * as ActionTypes from '../constants/ActionTypes';
-import { LIST_PAGE } from '../constants/PageTypes';
+import { SETTINGS_PAGE } from '../constants/PageTypes';
 import * as VariableHandler from '../helpers/VariableHandler';
 
 const initialState = fromJS({
@@ -10,7 +10,11 @@ const initialState = fromJS({
   items: [],
   currentPage: 'list',
   templateName: '',
-  selectedItemOptions: {}
+  selectedItemOptions: {},
+  selectedPartner: '',
+  selectedCampaign: '',
+  partners: [],
+  campaigns: []
 });
 
 export default function templates(state = initialState, action) {
@@ -43,14 +47,15 @@ export default function templates(state = initialState, action) {
 
           const options = VariableHandler.getVariableObjects(variables);
           return fromJS(options);
-        });
+        })
+        .set('currentPage', SETTINGS_PAGE);
 
       return newState;
     }
     case ActionTypes.SET_LANGUAGE:
       return state.mergeDeep(fromJS(action.data));
     case ActionTypes.FETCH_TEMPLATES:
-      return state.mergeDeep(fromJS({ items: action.data }));
+      return state.set('items', fromJS(action.data));
     case ActionTypes.SET_NEW_TEMPLATE_NAME:
       return state.set('templateName', action.name);
     case ActionTypes.CLEAR_INPUTS:
@@ -64,6 +69,14 @@ export default function templates(state = initialState, action) {
           return options;
         })
       );
+    case ActionTypes.FETCH_PARTNERS:
+      return state.set('partners', fromJS(action.data));
+    case ActionTypes.FETCH_CAMPAIGNS:
+      return state.set('campaigns', fromJS(action.data));
+    case ActionTypes.SET_CAMPAIGN:
+      return state.set('selectedCampaign', action.campaignId);
+    case ActionTypes.SET_PARTNER:
+      return state.set('selectedPartner', action.partnerName);
     default:
       return state;
   }

@@ -31,3 +31,20 @@ export function clearInputs() {
 export function setOptionsValue(name, value) {
   return { type: types.SET_OPTIONS_VALUE, name, value };
 }
+
+export function fetchPartners(data) {
+  return { type: types.FETCH_PARTNERS, data };
+}
+
+export function fetchCampaigns(data) {
+  return { type: types.FETCH_CAMPAIGNS, data };
+}
+
+export function setPartner(partnerName) {
+  return { type: types.SET_PARTNER, partnerName };
+}
+
+export function setCampaign(campaignId) {
+  return { type: types.SET_CAMPAIGN, campaignId };
+}
+

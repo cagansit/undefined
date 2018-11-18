@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/templates';
-import * as VariableHandler from '../helpers/VariableHandler';
 
 import style from './Option.css';
 
@@ -22,13 +21,9 @@ export default class Option extends Component {
       .find(item => item.selected === true);
 
   handleChange = (event) => {
-    const { javascriptCode, cssCode } = this.getSelectedTemplate();
-    const tag = `#{{${this.props.optionName}|${this.props.optionType}}}`;
+    // const { javascriptCode, cssCode } = this.getSelectedTemplate();
+    // const tag = `#{{${this.props.optionName}|${this.props.optionType}}}`;
     this.props.actions.setOptionsValue(this.props.optionName, event.target.value);
-    console.log(this.props.templates.get('selectedItemOptions'));
-    /* javascriptCode = VariableHandler.setVariable(event.target.value, tag, javascriptCode);
-    cssCode = VariableHandler.setVariable(event.target.value, tag, cssCode);
-    this.props.actions.setLanguage({ javascriptCode, cssCode }); */
   };
   render() {
     return (
