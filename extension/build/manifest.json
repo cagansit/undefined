@@ -30,5 +30,6 @@
         "https://*/*",
         "http://*/*"
     ],
-    "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+    "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:* https://localhost:* 'unsafe-eval'; connect-src http://localhost:* https://localhost:*; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
+//"content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"

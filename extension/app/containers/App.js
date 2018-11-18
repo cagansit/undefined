@@ -6,9 +6,11 @@ import style from './App.css';
 import Header from '../components/Header';
 import TemplateList from '../components/TemplateList';
 import Create from '../components/Create';
+import Settings from '../components/Settings';
 
 const LIST_PAGE = 'list';
 const CREATE_PAGE = 'create';
+const SETTINGS_PAGE = 'settings';
 
 @connect(
   state => ({
@@ -29,6 +31,8 @@ export default class App extends Component {
     switch (currentPage) {
       case CREATE_PAGE:
         return <Create />;
+      case SETTINGS_PAGE:
+        return <Settings />;
       case LIST_PAGE:
       default:
         return <TemplateList />;

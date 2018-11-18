@@ -1,16 +1,17 @@
 .codeEditors {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.javascriptContainer, .cssContainer {
+.javascriptContainer,
+.cssContainer {
     flex: 1;
     height: 300px;
-    margin-top: 20px;
-    padding: 0 15px;
+    margin: 20px 0px;
+    width: calc(100% - 20px);
 }
 
 .title {

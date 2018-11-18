@@ -1,0 +1,31 @@
+.option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.option:nth-child(even) {
+    background: #ececec;
+}
+
+.name {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    margin-right: 20px;
+    padding: 10px;
+    color: #333;
+}
+
+.optionInput {
+    display: flex;
+    flex: 3;
+    color: #333;
+    font-size: 24px;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+}

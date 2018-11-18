@@ -8,16 +8,12 @@ export function getVariableObjects(variables) {
     const type = variable.split('|').pop();
     return {
       name,
-      type
+      type,
+      value: ''
     };
   });
 
   return variablesArray;
-}
-
-export function createTag(variable) {
-  const tag = `#{{${variable.name}|${variable.type}}}`;
-  return tag;
 }
 
 export function setVariable(input, tag, code) {
