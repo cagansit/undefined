@@ -58,7 +58,7 @@ exports.getPartners = function(req, res) {
 
 exports.getCampaigns = function(req, res) {
     const response = { status: true };
-    const customCampaignsQuery = 'select id, campName from partner_'+req.query.partnerName+'.custom order by id limit 20';
+    const customCampaignsQuery = 'select id, campName from partner_'+req.query.partnerName+'.custom where campName like "%extemplate%" order by id limit 20';
     console.log(customCampaignsQuery);
     db.query(customCampaignsQuery, (err, result, fields) => {
         if (err) throw err;
